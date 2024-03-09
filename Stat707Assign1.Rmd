@@ -2,7 +2,11 @@
 title: "Stat707Assign1Task1"
 author: "Xiaodong Guo"
 date: "2024-03-09"
-output: pdf_document
+output: 
+  pdf_document:
+    latex_engine: xelatex
+header-includes:
+  - \usepackage{amssymb}
 ---
 
 ```{r setup, include=FALSE}
@@ -15,11 +19,15 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
+
+
 ##**Task 1:**##
 
 About 30% of human twins are identical and rest are fraternal. Identical twins are necessarily the same sex – half are males and half are females. One-quarter of fraternal twins are both male, one-quarter are both female and one-half are mixed: one male, one female. You have just become parent of twins and are told they are both girls. Given this information, what is the probability that they are identical?
 
+
 **Answer:** 
+
 
 Define:
 
@@ -33,7 +41,9 @@ C:All Male
 
 D: Mixed
 
+
 **Then**
+
 
   p(A)    = 30%
   
@@ -51,7 +61,9 @@ D: Mixed
   
   P(D|A-) = 50%
   
+
 **Thus**
+
 
   P(B)=P(B|A)P(A)+P(B|A-)P(A-)
       = 50% * 30% + 25% * 70%
@@ -73,13 +85,19 @@ D: Mixed
 ```
 
 
+
+
 ##**TASK2**##
+
 
 A coin is said to be unbiased if P(heads) = P(tails) = 0.5. Probability that a newly minted coin by a Government Mint is unbiased is 0.95. When an unbiased coin is tossed 100 times, the probability of getting 62 heads or more is 0.01 (0.01048 rounded off to two decimals) for an unbiased coin. As part of a quality control process at the Mint some of the newly minted coins are randomly selected and each coin is tossed 100 times. If a coin tosses heads 62 times or more, it is set aside as a possibly biased (faulty) coin. All such coins are to be melted down and re-minted, which has additional costs. A consultant has been hired to identify efficiencies in this process and see if the criteria of 62 heads or more could possibly be further optimized. Since you work as a data scientist, the consultant asks you to calculate the probability that the coin is unbiased given that it tossed 62 or more heads out of 100 tosses. Find this probability. Assume (just for this example) that a biased coin always has a P(heads) =0.55.
 Clearly define your events, state the formulae you are using and show your working.
 
 
+
+
 **Answer:**
+
 
 Define:
 
@@ -136,7 +154,9 @@ Thus:
 ```
 
 
-##TASK3
+
+
+##**TASK3**
 
   
 Question 2: 
@@ -144,14 +164,18 @@ This question is about the Central Limit Theorem (CLT). Task 2 is to be implemen
 Task 1:
 Explain in your own words what the CLT states. Explain also, the significance of it in practice.
 
+
 **Answer:**
+
 
 No matter what  the distribution of the whole sample space is, if we take random samples(larger than 30) from the sample space,and we repeat the sampling process in n times, the mean of sample(n) are normally distributed.
 
 According the Theorem,We can use Sample data to evaluate the whole sample space.
 
 
-##TASK4
+
+##**TASK4**
+
 
 Task 2:
 Choose a non-normal probability distribution. Illustrate how CLT holds true as sample size increases by simulating repeatedly from this distribution of your choosing. Make sure to report the following.
@@ -163,13 +187,29 @@ c. Use histogram and the summary statistic to illustrate that CLT works. Make su
 
 ```{r,echo=TRUE}
 
-'Generate the Beta Distribution Sample Space include 10000 number'
+'Answer a: Generate the Beta Distribution Sample Space include 10000 number,and α=100,  β=5'
+
 dv <- rbeta(10000,100,5)
-hist(dv)
-'the Sampe space generated from the Beta Distribution '
+
+'The Sampe space generated from the Beta Distribution,the Probability Density ploted:'
 plot(density(dv))
 
-sprintf("the Mean of whole sample space is %f",mean(dv))
+
+'Answer b: Expected Value of this distribution is '
+
+
+print(summary(dv))
+sprintf("the SD of whole sample space is %f",sd(dv))
+
+
+boxplot(dv)
+
+hist(dv)
+
+
+
+
+'Answer C:'
 
 print("try 2 time diffient sample number,but same sample times")
 print("The First Sample,sample number for each 30: ")
@@ -179,9 +219,14 @@ for(x in 1:2000)
   smVector <- append(smVector,mean(sample(dv,30)))
 }
 
+print(summary(smVector))
+
+boxplot(smVector)
+
 hist(smVector)
 plot(density(smVector))
 sprintf("the Mean of First sample data is %f",mean(smVector))
+sprintf("the SD of First sample data is %f",sd(smVector))
 
 print("The Second Sample,sample number for each 100: ")
 smVector <- c()
@@ -189,10 +234,14 @@ for(x in 1:2000)
 {
   smVector <- append(smVector,mean(sample(dv,100)))
 }
+print(summary(smVector))
+
+boxplot(smVector)
 
 hist(smVector)
 plot(density(smVector))
 sprintf("the Mean of Second sample data is %f",mean(smVector))
+sprintf("the SD of Second sample data is %f",sd(smVector))
 
 ```
 
@@ -202,6 +251,11 @@ We can see from the desity char that the Distribution of the 2000 means of the
 sample date from 2000 time sampling from our data space is close to normal 
 distribution. When The number of sample data for each sampling is bigger,the Shape
 of distribution is  closer to normal distribution.
+
+
+![Screan Shot](Screenshot 2024-03-09 223753.png)
+
+
 
 
 
