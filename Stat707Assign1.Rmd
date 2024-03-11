@@ -136,25 +136,32 @@ Thus:
   knitr::include_graphics("C:\\R_source\\Stat707Assign1\\probability-distributions0x.png")
 
   
-  p_B=0.5*0.95+0.55*0.05 
-  sprintf("The Probability get Head in All TYPES OF COINS P(B) is %f",p_B)
+ # p_B=0.5*0.95+0.55*0.05 
+  #sprintf("The Probability get Head in All TYPES OF COINS P(B) is %f",p_B)
   
+  P_A=0.95
+  P_A_=0.05
   
-  
-  p_C =1 - pbinom(61,100,p_B)
-  sprintf('The Probability get more than 62 head in 100 tries from all TYPES OF coins P(C) is %f ',p_C)
+  #p_C =1 - pbinom(61,100,p_B)
+  #sprintf('The Probability get 62 or more  head in 100 tries from all TYPES OF coins P(C) is %f ',p_C)
   
   
  
-  print('P(C|A) the Probability get more than 62 head in 100 tries for unbias coin is also a bino distribution:')
+  print('P(C|A) the Probability get 62 or  more than 62 head in 100 tries for unbias coin is also a bino distribution:')
   pC_A = 1-pbinom(61,100,0.5)
-  sprintf('the probability get more than 62 head in 100 tries for unbias coin is : %f\n',pC_A)
+  sprintf('the probability get 62 or more than 62 head in 100 tries for unbias coin is : %f\n',pC_A)
   
-
+  pC_A_=1-pbinom(61,100,0.55)
+  
+  sprintf('P(C|A-)the probability get 62 or  more than 62 head in 100 tries from bias coins is : %f',pC_A_)
+  
+  pC=pC_A*P_A+pC_A_*P_A_
+  
+  sprintf('p(C) the Probability get 62 or more than 62 head in 100 tries from all coins is: %f',pC)
   
   print('What we need is P(A|C)=P(C|A)P(A)/P(C): ')
   
-  PUnbiasGiven62= pC_A*0.95/p_C
+  PUnbiasGiven62= pC_A*0.95/pC
 
   print('')
   print('')
