@@ -109,9 +109,9 @@ Define:
    
    B-: get Tail in  ALL TYPES of COINS
    
-   C: Get62Head in ALL TYPES of COINS
+   C: GetEqualorMoreThen62Head in 100 times in ALL TYPES of COINS
    
-   
+   c-: GetLessThen62 in 100 times in ALL TYPES OF COINS
 
 Then:
 
@@ -137,23 +137,31 @@ Thus:
 
   
   p_B=0.5*0.95+0.55*0.05 
-  "The Probability get Head in All TYPES OF COINS P(B) is "
-  p_B
+  sprintf("The Probability get Head in All TYPES OF COINS P(B) is %f",p_B)
   
   
-  p_C = pbinom(62,100,p_B)
-  'The Probability get 62 head in 100 tries from all TYPES OF coins P(C) is '
-  p_C
+  
+  p_C =1 - pbinom(61,100,p_B)
+  sprintf('The Probability get more than 62 head in 100 tries from all TYPES OF coins P(C) is %f ',p_C)
   
   
-  'What we need is P(A|C)=P(C|A)P(A)/P(C): '
-  PUnbiasGiven62= 0.01048*0.95/p_C
+ 
+  print('P(C|A) the Probability get more than 62 head in 100 tries for unbias coin is also a bino distribution:')
+  pC_A = 1-pbinom(61,100,0.5)
+  sprintf('the probability get more than 62 head in 100 tries for unbias coin is : %f\n',pC_A)
+  
 
-  sprintf("The Answer  is %f%s ",PUnbiasGiven62*100,"%")
-    
+  
+  print('What we need is P(A|C)=P(C|A)P(A)/P(C): ')
+  
+  PUnbiasGiven62= pC_A*0.95/p_C
+
+  print('')
+  print('')
+  
+  sprintf("****The Answer  is %f%s *****",PUnbiasGiven62*100,"%")
+ 
 ```
-
-
 
 
 ##**TASK3**
